@@ -28,7 +28,7 @@ jobs:
         run: yarn playwright install
 
       - name: Run E2E tests
-        run: yarn run e2e
+        run: yarn run tests
 
       # --- NOVA ACTION 3: Publica os Resultados dos Testes E2E como Artefato ---
       # Isso permitirá que você baixe os resultados dos testes E2E como um artefato
