@@ -23,8 +23,34 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      # Executa os testes Mocha padrão (saída no log do GitHub Actions)
       - name: Run Mocha tests
         run: yarn test
+
+      # Executa os testes Mocha e gera relatório JUnit XML para integração com o GitHub Actions
+      - name: Run Mocha tests (JUnit)
+        run: yarn test:junit
+
+      # Publica o relatório JUnit na interface do GitHub Actions (Test Report)
+      - name: Publish JUnit Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Mocha JUnit Report
+          path: results.xml
+          reporter: java-junit
+
+      # Executa os testes Mocha e gera relatório HTML visual com Mochawesome
+      - name: Run Mocha tests (Mochawesome)
+        run: yarn test:mochawesome
+
+      # Faz upload do relatório HTML Mochawesome como artefato para download
+      - name: Upload Mochawesome Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mochawesome-report
+          path: mochawesome-report/
 
   deploy:
     runs-on: ubuntu-latest
