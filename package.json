@@ -3,12 +3,12 @@
   "description": "Trabalho final",
   "version": "1.0.0",
   "type": "module",
-  "dependencies": {},
   "devDependencies": {
-	"mocha": "^11.3.0"
+    "mocha": "^11.3.0",
+    "playwright": "^1.53.1"
   },
   "main": "trabalho-final.js",
   "scripts": {
-	"test": "mocha"
+    "test": "mocha"
   }
 }
