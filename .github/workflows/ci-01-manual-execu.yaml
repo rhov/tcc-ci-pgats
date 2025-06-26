@@ -5,6 +5,15 @@ name: "Disparo manual - Rodrigo Henrique"
 on:
   workflow_dispatch:
 
+# Permissões necessárias para que o dorny/test-reporter publique relatórios de teste
+# - checks:write permite criar relatórios na aba "Checks" do GitHub
+# - pull-requests:write permite comentar em pull requests (se necessário)
+# - contents:read permite ler o conteúdo do repositório
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+
 jobs:
   tests:
     runs-on: ubuntu-latest
