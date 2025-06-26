@@ -1,6 +1,6 @@
 {
   "name": "pgats-rodrigo-henrique",
-  "description": "Trabalho final",
+  "description": "Trabalho final da Disciplina de Integração Contínua",
   "version": "1.0.0",
   "type": "module",
   "devDependencies": {
@@ -9,6 +9,7 @@
   },
   "main": "trabalho-final.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "e2e": "npx playwright test"
   }
 }
