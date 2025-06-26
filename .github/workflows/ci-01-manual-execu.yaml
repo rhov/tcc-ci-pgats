@@ -82,7 +82,9 @@ jobs:
         run: yarn
       # Executa os testes Mocha e gera relatório no formato CTRF (Common Test Report Format)
       - name: Run Mocha tests (CTRF)
-        run: yarn test:ctrf
+        run: |
+          yarn test:ctrf
+          ls -lh ctrf-report.json || (echo 'Arquivo ctrf-report.json não foi gerado!' && exit 1)
       # Faz upload do relatório CTRF como artefato para download
       - name: Upload CTRF Report
         uses: actions/upload-artifact@v4
