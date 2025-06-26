@@ -385,6 +385,13 @@ mkdirp@^3.0.0:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-3.0.1.tgz#e44e4c5607fb279c168241713cc6e0fea9adcb50"
   integrity sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==
 
+mocha-ctrf-json-reporter@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/mocha-ctrf-json-reporter/-/mocha-ctrf-json-reporter-0.0.9.tgz#d5a0561cb94425e33c7a5447355fd06767258c25"
+  integrity sha512-9xMtcT7LujnIj84i58JFjrtCk/dRvMkYBSPUL6HdLqgKx9hO19QI+56VSYaGttMuNoBtO4v2dk99UWd8fufpjw==
+  dependencies:
+    md5 "^2.3.0"
+
 mocha-junit-reporter@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/mocha-junit-reporter/-/mocha-junit-reporter-2.2.1.tgz#739f5595d0f051d07af9d74e32c416e13a41cde5"

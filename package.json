@@ -5,6 +5,7 @@
   "type": "module",
   "devDependencies": {
     "mocha": "^11.3.0",
+    "mocha-ctrf-json-reporter": "^0.0.9",
     "mocha-junit-reporter": "^2.2.1",
     "mochawesome": "^7.1.3",
     "playwright": "^1.53.1"
@@ -14,6 +15,7 @@
     "test:junit": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=results.xml",
     "test:mochawesome": "mocha --reporter mochawesome",
     "test": "mocha",
-    "e2e": "npx playwright test"
+    "e2e": "npx playwright test",
+    "test:ctrf": "mocha --reporter mocha-ctrf-json-reporter --reporter-options output=ctrf-report.json"
   }
 }

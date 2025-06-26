@@ -66,6 +66,44 @@ jobs:
           name: mochawesome-report
           path: mochawesome-report/
 
+  ctrf-report:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+      - name: Install Yarn
+        run: npm install -g yarn
+      - name: Install dependencies
+        run: yarn
+      # Executa os testes Mocha e gera relatório no formato CTRF (Common Test Report Format)
+      - name: Run Mocha tests (CTRF)
+        run: yarn test:ctrf
+      # Faz upload do relatório CTRF como artefato para download
+      - name: Upload CTRF Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ctrf-report
+          path: ctrf-report.json
+      # Integração com o CTRF AI Test Reporter (substitua a URL/token conforme necessário)
+      # Veja https://github.com/ctrf-foundation/ctrf-ai-test-reporter para detalhes
+      - name: Enviar relatório para CTRF AI Test Reporter
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.CTRF_AI_TOKEN }}" \
+            --data-binary @ctrf-report.json \
+            https://api.ctrf.ai/report
+        env:
+          # Defina o segredo CTRF_AI_TOKEN nas configurações do repositório
+          CTRF_AI_TOKEN: ${{ secrets.CTRF_AI_TOKEN }}
+        # Comentário: Integração opcional, remova ou ajuste conforme sua conta/serviço CTRF AI
+
   deploy:
     runs-on: ubuntu-latest
     needs: [tests, reports]
