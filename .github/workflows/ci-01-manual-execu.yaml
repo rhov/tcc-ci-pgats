@@ -1,0 +1,48 @@
+# CI de Nível 1 - Disparo manual
+# TCC
+name: "Disparo manual - Rodrigo Henrique"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+   
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Install Playwright
+        run: yarn playwright install
+
+      - name: Run E2E tests
+        run: yarn run e2e
+
+      # --- NOVA ACTION 3: Publica os Resultados dos Testes E2E como Artefato ---
+      # Isso permitirá que você baixe os resultados dos testes E2E como um artefato
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        # Outros status podem ser: success(), failure(), always()
+        with:
+          name: relatorio-e2e # Nome do artefato
+          path: ./playwright-report # O caminho para o diretório com os resultados dos testes E2E
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: e2e-tests # Esta job depende da conclusão da job de testes E2E
+
+    steps:
+      - name: Simulando deploy
+        run: echo "Simulating deployment..." # Simulação de deploy, substitua pelo seu
