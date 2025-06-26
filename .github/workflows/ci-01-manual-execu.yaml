@@ -84,14 +84,14 @@ jobs:
       - name: Run Mocha tests (CTRF)
         run: |
           yarn test:ctrf
-          ls -lh ctrf-report.json || (echo 'Arquivo ctrf-report.json não foi gerado!' && exit 1)
+          ls -lh ctrf/ctrf-report.json || (echo 'Arquivo ctrf/ctrf-report.json não foi gerado!' && exit 1)
       # Faz upload do relatório CTRF como artefato para download
       - name: Upload CTRF Report
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ctrf-report
-          path: ctrf-report.json
+          path: ctrf/ctrf-report.json
       # Integração com o CTRF AI Test Reporter (substitua a URL/token conforme necessário)
       # Veja https://github.com/ctrf-foundation/ctrf-ai-test-reporter para detalhes
       - name: Enviar relatório para CTRF AI Test Reporter
@@ -99,7 +99,7 @@ jobs:
           curl -X POST \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.CTRF_AI_TOKEN }}" \
-            --data-binary @ctrf-report.json \
+            --data-binary @ctrf/ctrf-report.json \
             https://api.ctrf.ai/report
         env:
           # Defina o segredo CTRF_AI_TOKEN nas configurações do repositório
